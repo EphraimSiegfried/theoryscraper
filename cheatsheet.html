@@ -4,17 +4,31 @@ body { font-size: 10px; }
 .columns { column-count: 3; }
 @media print { @page { size: A4; } }
 </style>
-</head><body><div class="columns">
+</head><body>
+<h1>Definitions</h1>
+<div class="columns">
 <p><b>Total Function</b>
 A (total) function f : D → C (with sets D, C )
 maps every value of its domain D
 to exactly one value of its codomain C .
+Example
+▶ square : Z → Z with square(x) = x 2
+▶ add : N2
+▶ add R : R2 → R with add R(x, y ) = x + y
+0 → N0 with add(x, y ) = x + y
 </p>
 <p><b>Partial Function</b>
 A partial function f : X →p Y maps every value in X
 to at most one value in Y .
 If f does not map x ∈ X to any value in Y ,
 then f is undefined for x.
+Example
+f : N0 × N0 →p N0 with
+f (x, y ) =
+(cid:40)
+x − y
+undefined otherwise
+if y ≤ x
 </p>
 <p><b></b>A set is an unordered collection of distinct objects.
 The set that does not contain any objects is the empty set ∅.
@@ -31,6 +45,10 @@ The empty word (the empty sequence of elements) is denoted by ε.
 Σ+ (= Σ∗ \ {ε}) denotes the set of all non-empty words over Σ.
 We write |w | for the length of a word w .
 A formal language (over alphabet Σ) is a subset of Σ∗.
+Example
+Σ = {a, b}
+Σ∗ = {ε, a, b, aa, ab, ba, bb, . . . }
+|aba| = 3, |b| = 1, |ε| = 0
 </p>
 <p><b>Deterministic Finite Automata</b>
 A deterministic finite automaton (DFA) is a 5-tuple
@@ -237,6 +255,7 @@ then L(γ) = L(α)L(β).
 then L(γ) = L(α) ∪ L(β).
 ▶ If γ = (α∗) where α is a regular expression,
 then L(γ) = L(α)∗.
+Examples: blackboard
 </p>
 <p><b>Generalized Nondeterministic Finite Automata</b>
 A generalized nondeterministic finite automaton (GNFA) is a
@@ -256,32 +275,6 @@ and a sequence of states q0, q1, . . . , qk ∈ Q exists with
 2
 for each i, we have wi ∈ L(Ri ), where Ri = δ(qi−1, qi ), and
 3 qk = qa.
-</p>
-<p><b>Context-free Grammar</b>
-A context-free grammar is a 4-tuple ⟨V , Σ, P, S⟩ with
-1 V finite set of variables,
-2 Σ finite alphabet of terminal symbols (with V ∩ Σ = ∅),
-3 P ⊆ (V × (V ∪ Σ)+) ∪ {⟨S, ε⟩} finite set of rules,
-4
-If S → ε ∈ P, then all other rules in V × ((V \ {S}) ∪ Σ)+.
-5 S ∈ V start variable.
-Rule X → ε is only allowed if X = S
-and S never occurs on a right-hand side.
-With regular grammars, this restriction could be lifted.
-How about context-free grammars?
-</p>
-<p><b>Context-free Grammar</b>
-A context-free grammar is a 4-tuple ⟨V , Σ, P, S⟩ with
-1 V finite set of variables,
-2 Σ finite alphabet of terminal symbols (with V ∩ Σ = ∅),
-3 P ⊆ (V × (V ∪ Σ)+) ∪ {⟨S, ε⟩} finite set of rules,
-4
-If S → ε ∈ P, then all other rules in V × ((V \ {S}) ∪ Σ)+.
-5 S ∈ V start variable.
-Rule X → ε is only allowed if X = S
-and S never occurs on a right-hand side.
-With regular grammars, this restriction could be lifted.
-How about context-free grammars?
 </p>
 <p><b>Context-free Grammar</b>
 A context-free grammar is a 4-tuple ⟨V , Σ, P, S⟩ with
@@ -461,10 +454,6 @@ if w is the encoding of some DTM M ′
 M ′
 (cid:98)M otherwise
 </p>
-<p><b>Turing-decidable Language</b>
-We call a language Turing-decidable (or decidable) if some
-deterministic Turing machine decides it.
-</p>
 <p><b>Halting Problem</b>
 The halting problem is the language
 H = {w #x ∈ {0, 1, #}∗ | w , x ∈ {0, 1}∗,
@@ -498,6 +487,7 @@ f code : Σ∗ →p Σ∗ with Σ = {0, 1, #} and f code(w ) = w ′ iff
 ▶ w ′ = bin(n′).
 Here bin : N0 → {0, 1}∗ is the binary encoding
 (e. g., bin(5) = 101).
+Example: f (5, 2, 3) = 4 corresponds to f code(101#10#11) = 100.
 </p>
 <p><b></b>A (partial) function f : Nk
 if a DTM that computes f code exists.
@@ -532,6 +522,10 @@ i1, i2, . . . , in ∈ {1, . . . , k}, n ≥ 1,
 with ti1ti2 . . . tin = bi1bi2 . . . bin ?
 A solution of the correspondence problem is such a sequence
 i1, . . . , in, which we call a match.
+</p>
+<p><b>new problem P</b>
+The problem P is the language
+P = {⟨⟨I⟩⟩ | I is an instance with the required property}.
 </p>
 <p><b>Post Correspondence Problem PCP</b>
 The Post Correspondence Problem PCP is the set
@@ -655,11 +649,6 @@ written A ≤p B, if there is a function f : Σ∗ → Γ∗ such that:
 f is called a polynomial reduction from A to B
 Transitivity of ≤p: If A ≤p B and B ≤p C , then A ≤p C .
 </p>
-<p><b>NP-Hard, NP-Complete</b>
-Let B be a decision problem.
-B is called NP-hard if A ≤p B for all problems A ∈ NP.
-B is called NP-complete if B ∈ NP and B is NP-hard.
-</p>
 <p><b>SAT</b>
 The problem SAT (satisfiability) is defined as follows:
 Given: a propositional logic formula φ
@@ -708,16 +697,6 @@ The problem HamiltonCycle is defined as follows:
 Given: undirected graph G = ⟨V , E ⟩
 Question: Does G contain a Hamilton cycle?
 </p>
-<p><b>Reminder: TSP</b>
-TSP (traveling salesperson problem) is the following
-decision problem:
-▶ Given: finite set S ̸= ∅ of cities, symmetric cost function
-cost : S × S → N0, cost bound K ∈ N0
-▶ Question: Is there a tour with total cost at most K , i. e.,
-a permutation ⟨s1, . . . , sn⟩ of the cities with
-(cid:80)n−1
-i=1 cost(si , si+1) + cost(sn, s1) ≤ K ?
-</p>
 <p><b>SubsetSum</b>
 The problem SubsetSum is defined as follows:
 Given: numbers a1, . . . , ak ∈ N0 and b ∈ N0
@@ -751,11 +730,16 @@ Can you pack objects 1, 3, 3, 5, 8, 9 into 3 bins of size 10?
 </p>
 <p><b>coNP</b>
 coNP is the set of all languages L for which ¯L ∈ NP.
+Example: The complement of SAT is in coNP.
 </p>
 <p><b>Hardness and Completeness</b>
 Let C be a complexity class.
 A problem Y is called C-hard if X ≤p Y for all problems X ∈ C.
 Y is called C-complete if Y ∈ C and Y is C-hard.
+Example (Tautology)
+The following problem Tautology is coNP-complete:
+Given: a propositional logic formula φ
+Question: Is φ valid, i.e. is it true under all variable assignments?
 </p>
 <p><b>Time Complexity Classes TIME and NTIME</b>
 Let t : N → R+ be a function.
@@ -892,4 +876,312 @@ A function f : Nk
 if a GOTO program that computes f exists.
 0 → N0 is called GOTO-computable
 </p>
-</div></body></html>
+</div>
+<h1>Theorems</h1>
+<div class="columns">
+<p><b>distributivity</b>
+For all sets A, B, C : A ∩ (B ∪ C ) = (A ∩ B) ∪ (A ∩ C ).
+</p>
+<p><b></b>There are infinitely many prime numbers.
+</p>
+<p><b></b>For all n ∈ N0 with n ≥ 1: (cid:80)n
+k=1(2k − 1) = n2
+</p>
+<p><b>Rabin, Scott</b>
+Every language recognized by an NFA is also recognized by a DFA.
+The proof of the theorem is constructive and shows how we can
+convert an NFA to an equivalent DFA. Let’s first have a look at
+the idea by means of an example (on the blackboard).
+</p>
+<p><b>Rabin, Scott</b>
+Every language recognized by an NFA is also recognized by a DFA.
+</p>
+<p><b></b>For every grammar G = ⟨V , Σ, R, S⟩ there is a grammar
+G ′ = ⟨V ′, Σ, R ′, S⟩ with rules
+R ′ ⊆ (V ′ ∪ Σ)∗V ′(V ′ ∪ Σ)∗ × (V ′ \ {S} ∪ Σ)∗ such that
+L(G ) = L(G ′).
+Note: this theorem is true for all grammars.
+</p>
+<p><b></b>For every grammar G with rules R ⊆ V × (Σ ∪ ΣV ∪ {ε})
+there is a regular grammar G ′ with L(G ) = L(G ′).
+</p>
+<p><b></b>Every language recognized by a DFA is regular (type 3).
+</p>
+<p><b></b>For every regular grammar G there is an NFA M
+with L(G ) = L(M).
+</p>
+<p><b></b>The regular languages are closed under union.
+</p>
+<p><b></b>The regular languages are closed under concatenation.
+</p>
+<p><b></b>The regular languages are closed under star.
+</p>
+<p><b></b>The regular languages are closed under complement.
+</p>
+<p><b></b>The regular languages are closed under intersection.
+</p>
+<p><b></b>The regular languages are closed under:
+▶ union
+▶ intersection
+▶ complement
+▶ concatenation
+▶ star
+</p>
+<p><b></b>The word problem for regular languages is decidable.
+</p>
+<p><b></b>The emptiness problem for regular languages is decidable.
+</p>
+<p><b></b>The finiteness problem for regular languages is decidable.
+</p>
+<p><b></b>The intersection problem for regular languages is decidable.
+</p>
+<p><b></b>The equivalence problem for regular languages is decidable.
+</p>
+<p><b></b>Every finite language can be described by a regular expression.
+</p>
+<p><b></b>For every language that can be described by a regular expression,
+there is an NFA that accepts it.
+</p>
+<p><b></b>Every language recognized by a DFA can be described
+by a regular expression.
+We can prove this using a generalization of NFAs.
+We specify the corresponding algorithm.
+</p>
+<p><b>Kleene</b>
+The set of languages that can be described by regular expressions
+is exactly the set of regular languages.
+This follows directly from the previous two theorems.
+</p>
+<p><b>Pumping Lemma</b>
+If L is a regular language then there is a number p ∈ N
+(a pumping number for L) such that all words x ∈ L with |x| ≥ p
+can be split into x = uvw with the following properties:
+1
+2
+|v | ≥ 1,
+|uv | ≤ p, and
+3 uv i w ∈ L for all i = 0, 1, 2, . . . .
+</p>
+<p><b></b>For every grammar G = ⟨V , Σ, P, S⟩ there is a grammar
+G ′ = ⟨V ′, Σ, P ′, S⟩ with rules P ′ ⊆ (V ′ ∪ Σ)+ × (V ′ \ {S} ∪ Σ)∗
+such that L(G ) = L(G ′).
+In the proof we constructed a suitable grammar, where the rules in
+P ′ were not fundamentally different from the rules in P:
+▶ for rules from V × (V ∪ Σ)+, we only introduced additional
+rules from V ′ × (V ′ ∪ Σ)+, and
+▶ for rules from V × ε, we only introduced rules from V ′ × ε,
+where V ′ = V ∪ {S ′} for some new variable S ′ ̸∈ V .
+</p>
+<p><b></b>For every grammar G with rules P ⊆ V × (V ∪ Σ)∗
+there is a context-free grammar G ′ with L(G ) = L(G ′).
+</p>
+<p><b></b>For every context-free grammar G there is a context-free grammar
+G ′ in Chomsky normal form with L(G ) = L(G ′).
+</p>
+<p><b></b>A language L is context-free if and only if
+L is recognized by a push-down automaton.
+</p>
+<p><b></b>The context-free languages are closed under:
+▶ union
+▶ concatenation
+▶ star
+</p>
+<p><b></b>The context-free languages are not closed under:
+▶ intersection
+▶ complement
+</p>
+<p><b></b>The word problem P∈ for context-free languages is decidable.
+</p>
+<p><b></b>The emptiness problem for context-free languages is decidable.
+</p>
+<p><b></b>The finiteness problem for context-free languages is decidable.
+We omit the proof. A possible proof uses the pumping lemma
+for context-free languages.
+</p>
+<p><b></b>The equivalence problem for context-free languages
+and the intersection problem for context-free languages
+are not decidable.
+We cannot show this with the means currently available,
+but we will get back to this in Part C (computability theory).
+</p>
+<p><b></b>Every multitape TM has an equivalent single-tape TM.
+</p>
+<p><b></b>A language is Turing-recognizable iff some multitape Turing
+machine recognizes it.
+</p>
+<p><b></b>Every nondeterministic Turing machine has an equivalent
+deterministic Turing machine.
+</p>
+<p><b></b>A language is Turing-recognizable iff some nondeterministic Turing
+machine recognizes it.
+</p>
+<p><b></b>The languages that can be recognized by linear bounded automata
+are exactly the context-sensitive (type-1) languages.
+Without proof.
+proof sketch for grammar ⇒ NTM direction:
+▶ computation of the NTM follows the production of the word
+in the grammar in opposite order
+▶ accept when only the start symbol (and blanks)
+are left on the tape
+▶ because the language is context-sensitive,
+we never need additional space on the tape
+(empty word needs special treatment)
+</p>
+<p><b></b>The languages that can be recognized by nondeterministic
+Turing machines are exactly the type-0 languages.
+Without proof.
+proof sketch for grammar ⇒ NTM direction:
+▶ analogous to previous proof
+▶ for grammar rules w1 → w2 with |w1| > |w2|,
+we must “insert” symbols into the existing tape content;
+this is a bit tedious, but not very difficult
+</p>
+<p><b>Decidable vs. Turing-recognizable</b>
+A language L is decidable iff both L and ¯L are Turing-recognizable.
+</p>
+<p><b></b>The halting problem H is Turing-recognizable.
+The following Turing machine U recognizes language H:
+On input w #x:
+1
+If the input contains more than one # then reject.
+2 Simulate Mw (the TM encoded by w ) on input x.
+3
+If Mw halts, accept.
+What does U do if Mw does not halt on the input?
+U is an example of a so-called universal Turing machine
+which can simulate any other Turing machine
+from the description of that machine.
+</p>
+<p><b>Undecidability of the Halting Problem</b>
+The halting problem H is undecidable.
+</p>
+<p><b></b>A language L ⊆ Σ∗ is decidable iff χL : Σ∗ → {0, 1},
+the characteristic function of L, is computable.
+Here, for all w ∈ Σ∗:
+χL(w ) :=
+(cid:40)
+1
+0
+if w ∈ L
+if w /∈ L
+</p>
+<p><b></b>A language L ⊆ Σ∗ is Turing-recognizable
+iff the following function χ′
+L : Σ∗ →p {0, 1} is computable.
+Here, for all w ∈ Σ∗:
+χ′
+L(w ) =
+(cid:40)
+1
+if w ∈ L
+undefined if w ̸∈ L
+</p>
+<p><b>Reductions vs. Turing-recognizability/Decidability</b>
+Let A and B be languages with A ≤ B. Then:
+1
+2
+3
+4
+If B is decidable, then A is decidable.
+If B is Turing-recognizable, then A is Turing-recognizable.
+If A is not decidable, then B is not decidable.
+If A is not Turing-recognizable, then B is not
+Turing-recognizable.
+⇝ In the following, we use 3. to show undecidability
+for further problems.
+</p>
+<p><b>Reductions are Preorders</b>
+The relation “≤” is a preorder:
+1 For all languages A:
+A ≤ A (reflexivity)
+2 For all languages A, B, C :
+If A ≤ B and B ≤ C , then A ≤ C (transitivity)
+</p>
+<p><b>Undecidability of Halting Problem on Empty Tape</b>
+The halting problem on the empty tape is undecidable.
+</p>
+<p><b>Turing-recognizability of PCP</b>
+PCP is Turing-recognizable.
+</p>
+<p><b>Undecidability of PCP</b>
+PCP is undecidable.
+</p>
+<p><b>Rice’s Theorem</b>
+Let R be the class of all computable partial functions.
+Let S be an arbitrary subset of R except S = ∅ or S = R.
+Then the language
+C (S) = {w ∈ {0, 1}∗ | the (partial) function computed by Mw
+is in S}
+is undecidable.
+</p>
+<p><b>HamiltonCycle ≤p TSP</b>
+HamiltonCycle ≤p TSP.
+</p>
+<p><b>Properties of Polynomial Reductions</b>
+Let A, B and C decision problems.
+1
+2
+3
+4
+5
+If A ≤p B and B ∈ P, then A ∈ P.
+If A ≤p B and B ∈ NP, then A ∈ NP.
+If A ≤p B and A /∈ P, then B /∈ P.
+If A ≤p B and A /∈ NP, then B /∈ NP.
+If A ≤p B and B ≤p C , then A ≤p C .
+</p>
+<p><b>Proving NP-Completeness by Reduction</b>
+Let A and B be problems such that:
+▶ A is NP-hard, and
+▶ A ≤p B.
+Then B is also NP-hard.
+If furthermore B ∈ NP, then B is NP-complete.
+</p>
+<p><b>Cook, 1971; Levin, 1973</b>
+SAT is NP-complete.
+</p>
+<p><b>3SAT is NP-Complete</b>
+3SAT is NP-complete.
+</p>
+<p><b>Clique is NP-Complete</b>
+Clique is NP-complete.
+</p>
+<p><b>IndSet is NP-Complete</b>
+IndSet is NP-complete.
+</p>
+<p><b>VertexCover is NP-Complete</b>
+VertexCover is NP-complete.
+</p>
+<p><b></b>DirHamiltonCycle is NP-complete.
+</p>
+<p><b></b>HamiltonCycle is NP-complete.
+</p>
+<p><b></b>TSP is NP-complete.
+</p>
+<p><b></b>SubsetSum is NP-complete.
+</p>
+<p><b></b>Partition is NP-complete.
+</p>
+<p><b></b>BinPacking is NP-complete.
+</p>
+<p><b></b>Every LOOP-computable function is WHILE-computable.
+The converse is not true.
+WHILE programs are therefore strictly more powerful
+than LOOP programs.
+</p>
+<p><b></b>The Ackermann function is WHILE-computable,
+but not LOOP-computable.
+(Without proof.)
+</p>
+<p><b></b>Every GOTO-computable function is WHILE-computable.
+If we allow IF statements, a single WHILE loop is sufficient for this.
+(We will discuss the converse statement later.)
+</p>
+<p><b></b>Every WHILE-computable function is Turing-computable.
+(We will discuss the converse statement later.)
+</p>
+<p><b>Turing-Computability vs. GOTO-Computability</b>
+Every Turing-computable numerical function is GOTO-computable.
+</p>
+</div>
+</body></html>
